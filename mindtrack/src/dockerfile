@@ -1,0 +1,14 @@
+# Imagem base com Java 17
+FROM eclipse-temurin:17-jdk-alpine
+
+# Diretório dentro do container
+WORKDIR /app
+
+# Copia o jar gerado
+COPY target/mindtrack-0.0.1-SNAPSHOT.jar app.jar
+
+# Porta da aplicação
+EXPOSE 8080
+
+# Comando de execução
+ENTRYPOINT ["java", "-jar", "app.jar"]
