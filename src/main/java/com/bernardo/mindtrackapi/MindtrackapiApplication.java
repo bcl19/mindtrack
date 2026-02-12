@@ -1,13 +1,13 @@
-package com.bernardochimelli.mindtracker;
+package com.bernardo.mindtrackapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MindtrackerApplication {
+public class MindtrackapiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MindtrackerApplication.class, args);
+		SpringApplication.run(MindtrackapiApplication.class, args);
 	}
 
 }
