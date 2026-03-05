@@ -1,8 +1,0 @@
-services:
-  mindtrackapi:
-    image: mindtrackapi
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    ports:
-      - 5432:5432
