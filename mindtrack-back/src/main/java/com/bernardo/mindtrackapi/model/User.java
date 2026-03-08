@@ -1,4 +1,4 @@
-package com.bernardo.mindtrackapi.models;
+package com.bernardo.mindtrackapi.model;
 
 import jakarta.persistence.Id;
 

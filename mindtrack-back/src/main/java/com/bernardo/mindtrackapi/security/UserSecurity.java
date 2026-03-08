@@ -1,5 +1,13 @@
 package com.bernardo.mindtrackapi.security;
 
-public class UserSecurity {
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+public class UserSecurity implements UserDetailsService {
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return null; // Replace with actual implementation
+    }
 
 }
