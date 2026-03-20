@@ -1,13 +1,8 @@
 package com.bernardo.mindtrackapi.exception;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+public class UserException extends RuntimeException {
 
-@Data
-@Builder
-@AllArgsConstructor
-
-public class UserException {
-        private String message;
+    public UserException(String message) {
+        super(message);
+    }
 }

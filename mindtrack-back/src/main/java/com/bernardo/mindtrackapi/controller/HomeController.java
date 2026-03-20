@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/home")
 
 public class HomeController {
-    @RequestMapping("/welcome")
+    @RequestMapping("/welcome2")
     public String welcome() {
         return "Welcome to the MindTrack";
     }
