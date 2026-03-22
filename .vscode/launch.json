@@ -10,6 +10,16 @@
                 "package": "${workspaceFolder}/mindtrack-front/package.json",
                 "localRoot": "${workspaceFolder}/mindtrack-front"
             }
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MindtrackapiApplication<mindtrackapi>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.bernardo.mindtrackapi.MindtrackapiApplication",
+            "projectName": "mindtrackapi",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

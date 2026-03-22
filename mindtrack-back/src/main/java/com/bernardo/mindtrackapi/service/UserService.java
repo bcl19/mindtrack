@@ -31,6 +31,7 @@ public class UserService {
     }
 
     // Buscar por ID
+    @SuppressWarnings("null")
     public User getUserById(Long id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new UserException("Usuário não encontrado"));
@@ -39,6 +40,7 @@ public class UserService {
     // Atualizar usuário
     public User updateUser(Long id, User userDetails) {
 
+        @SuppressWarnings("null")
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserException("Usuário não encontrado"));
 
@@ -49,8 +51,10 @@ public class UserService {
     }
 
     // Deletar usuário
+    @SuppressWarnings("null")
     public void deleteUser(Long id) {
 
+        @SuppressWarnings("null")
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserException("Usuário não encontrado"));
 
