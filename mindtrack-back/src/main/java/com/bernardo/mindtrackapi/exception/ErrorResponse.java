@@ -14,7 +14,13 @@ public class ErrorResponse {
         this.timestamp = LocalDateTime.now();
     }
 
-    public String getMessage() { return message; }
-    public int getStatus() { return status; }
-    public LocalDateTime getTimestamp() { return timestamp; }
+    public String getMessage() { 
+        return message; 
+    }
+    public int getStatus() { 
+        return status; 
+    }
+    public LocalDateTime getTimestamp() {
+         return timestamp; 
+        }
 }
