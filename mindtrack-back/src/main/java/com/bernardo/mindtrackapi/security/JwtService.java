@@ -1,19 +1,24 @@
 package com.bernardo.mindtrackapi.security;
 
-import com.bernardo.mindtrackapi.model.User;
-import org.springframework.stereotype.Service;
-import com.bernardo.mindtrackapi.security.JwtFilter;
-import java.security.Key;
 import java.util.Date;
+
+import javax.crypto.SecretKey;
+
+import org.springframework.stereotype.Service;
+
+import com.bernardo.mindtrackapi.model.User;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 
 @Service
 public class JwtService {
 
-    private final String SECRET = "minha-chave-super-secreta-123456789";
+    private final String SECRET = "mysecretkey1234";
     private final long EXPIRATION = 1000 * 60 * 60 * 24; // 1 dia
 
-    private Key getKey() {
-        return org.springframework.data.repository.query.QueryLookupStrategy.Key.hmacShaKeyFor(SECRET.getBytes());
+    private SecretKey getKey() {
+        return Keys.hmacShaKeyFor(SECRET.getBytes());
     }
 
     public String generateToken(User user) {

@@ -9,6 +9,10 @@ public class LoginResponseDTO {
         this.token = token;
     }
 
-    public String getToken() { return token; }
-    public String getType() { return type; }
+    public String getToken() { 
+        return token; 
+    }
+    public String getType() {
+         return type; 
+        }
 }
