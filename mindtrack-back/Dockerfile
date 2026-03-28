@@ -1,5 +1,4 @@
 FROM openjdk:21-jdk-alpine
-VOLUME /tmp
 ARG JAVA_OPTS
 ENV JAVA_OPTS=$JAVA_OPTS
 COPY target/mindtrackapi-0.0.1-SNAPSHOT.jar mindtrackapi.jar
