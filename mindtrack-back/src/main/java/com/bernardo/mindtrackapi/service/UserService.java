@@ -54,7 +54,6 @@ public class UserService {
     @SuppressWarnings("null")
     public void deleteUser(Long id) {
 
-        @SuppressWarnings("null")
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserException("Usuário não encontrado"));
 
