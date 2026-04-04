@@ -19,6 +19,7 @@ MindTrack is a mental health and productivity tracking platform. This repository
 
 - Node.js v14+ (or your language/version)
 - npm or yarn
+- Java 17 and Spring Boot
 
 ### Installation
 
@@ -52,6 +53,7 @@ npm start
 ## Related Repositories
 
 - [mindtrack-front](https://github.com/bcl19/mindtrack-front) - Frontend application
+- [mindtrack-back](https://github.com/bcl19/mindtrackapi) - BackEnd Application
 
 ## License
 
