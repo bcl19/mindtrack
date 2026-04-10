@@ -1,8 +1,9 @@
 package com.bernardo.mindtrackapi.security;
 
+import org.springframework.stereotype.Service;
+
 import com.bernardo.mindtrackapi.model.User;
 import com.bernardo.mindtrackapi.repository.UserRepository;
-import org.springframework.stereotype.Service;
 
 @Service
 public class AuthService {
@@ -32,6 +33,7 @@ public class AuthService {
         User user = new User();
         user.setEmail(request.email);
         user.setPassword(request.password);
+        user.setName(request.name);
 
         repo.save(user);
 
