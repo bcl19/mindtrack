@@ -1,12 +1,12 @@
 package com.bernardo.mindtrackapi.dto.auth;
 
-public class LoginResponseDTO {
+public record LoginResponseDTO (
 
-    private final String token;
-    private final String type = "Bearer";
-
+    String token,
+    String type
+) {
     public LoginResponseDTO(String token) {
-        this.token = token;
+        this(token, "Bearer");
     }
 
     public String getToken() { 

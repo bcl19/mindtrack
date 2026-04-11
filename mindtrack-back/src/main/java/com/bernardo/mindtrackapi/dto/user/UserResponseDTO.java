@@ -1,16 +1,10 @@
 package com.bernardo.mindtrackapi.dto.user;
 
-public class UserResponseDTO {
-
-    private final String id;
-    private final String name;
-    private final String email;
-
-    public UserResponseDTO(String id, String name, String email) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-    }
+public record UserResponseDTO (
+     String id,
+     String name,
+     String email
+){
 
     public String getId() { 
         return id; 
