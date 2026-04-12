@@ -1,14 +1,12 @@
 package com.bernardo.mindtrackapi.controller;
 
 import java.util.List;
-
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.bernardo.mindtrackapi.model.Result;
 import com.bernardo.mindtrackapi.repository.ResultRepository;
 
@@ -28,7 +26,7 @@ public Result save(@RequestBody Result result) {
        }
        return repository.save(result);
 }
-@GetMapping("path")
+@GetMapping()
 public List<Result> getAll() {
     return repository.findAll();
 }
