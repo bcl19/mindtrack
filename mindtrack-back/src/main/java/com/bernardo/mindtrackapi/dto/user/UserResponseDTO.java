@@ -1,11 +1,6 @@
 package com.bernardo.mindtrackapi.dto.user;
 
-public record UserResponseDTO (
-     String id,
-     String name,
-     String email
-){
-
+public record UserResponseDTO(String id,String name,String email){
     public String getId() { 
         return id; 
     }

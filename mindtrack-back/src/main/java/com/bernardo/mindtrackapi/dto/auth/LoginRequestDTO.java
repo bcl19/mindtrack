@@ -3,22 +3,10 @@ package com.bernardo.mindtrackapi.dto.auth;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
-public class LoginRequestDTO {
-
-    @Email
-    @NotBlank
-    private String email;
-
-    @NotBlank
-    private String password;
-    
-    @NotBlank
-    private String name;
-
+public record LoginRequestDTO(@Email @NotBlank String email, @NotBlank String password, @NotBlank String name) {
     public String getName() { 
-        return name; 
-    }
-
+        return name;
+}
     public String getEmail() { 
         return email;
      }

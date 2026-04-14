@@ -4,6 +4,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.bernardo.mindtrackapi.model.User;
+import com.bernardo.mindtrackapi.model.Role; // 🔥 IMPORTANTE
 import com.bernardo.mindtrackapi.repository.UserRepository;
 
 @Service
@@ -19,13 +20,13 @@ public class AuthService {
     }
 
     public AuthResponseDTO login(AuthRequestDTO request) {
-        User user = repo.findByEmail(request.email).orElse(null);
+        User user = repo.findByEmail(request.email()).orElse(null);
 
         if (user == null) {
             throw new RuntimeException("Usuário não encontrado");
         }
 
-        if (!encoder.matches(request.password, user.getPassword())) {
+        if (!encoder.matches(request.password(), user.getPassword())) {
             throw new RuntimeException("Senha inválida");
         }
 
@@ -34,15 +35,15 @@ public class AuthService {
     }
 
     public AuthResponseDTO register(AuthRequestDTO request) {
-        if (repo.findByEmail(request.email).isPresent()) {
+        if (repo.findByEmail(request.email()).isPresent()) {
             throw new RuntimeException("Email já cadastrado");
         }
 
         User user = new User();
-        user.setName(request.name);
-        user.setEmail(request.email);
-        user.setPassword(encoder.encode(request.password)); // 🔐 CORRETO
-        user.setRole(user.getRole()); // default USER
+        user.setName(request.name());
+        user.setEmail(request.email());
+        user.setPassword(encoder.encode(request.password()));
+        user.setRole(Role.USER); // 🔥 CORREÇÃO PRINCIPAL
 
         repo.save(user);
 
