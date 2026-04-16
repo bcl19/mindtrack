@@ -36,7 +36,7 @@ public class UserController {
     @GetMapping("/{id}")
     public UserResponseDTO getById(@PathVariable @NonNull Long id) {
         User user = repo.findById(id)
-                .orElseThrow(()-> new RuntimeException("User not found " + id));
+                .orElseThrow(()-> new RuntimeException("Usuário não encontrado " + id));
 
         return new UserResponseDTO(
                 user.getId().toString(),
