@@ -1,11 +1,10 @@
-
 # MindTrack API
 
 Backend API for the MindTrack application.
 
 ## Overview
 
-MindTrack is a mental health and productivity tracking platform. This repository contains the backend services and API endpoints.
+MindTrack is a mental health and productivity tracking platform. This repository contains the backend services, API endpoints and frontend design.
 
 ## Tech Stack
 
@@ -24,9 +23,13 @@ MindTrack is a mental health and productivity tracking platform. This repository
 ### Installation
 
 ```bash
-git clone https://github.com/bcl19/mindtrackapi
+git clone https://github.com/bcl19/mindtrack
 cd mindtrack-front
 npm install
+
+cd mindtrack-back
+mvn:
+
 ```
 
 ### Configuration
