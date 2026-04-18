@@ -14,7 +14,7 @@ import com.bernardo.mindtrackapi.repository.ResultRepository;
 
 @RestController
 @RequestMapping("/result")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173")
 public class ResultController {
         private final ResultRepository repository;
 
@@ -28,7 +28,7 @@ public Result save(@RequestBody Result result) {
        }
        return repository.save(result);
 }
-@GetMapping()
+@GetMapping
 public List<Result> getAll() {
     return repository.findAll();
 }
