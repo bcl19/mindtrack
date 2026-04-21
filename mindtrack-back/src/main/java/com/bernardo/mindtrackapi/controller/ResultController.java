@@ -32,4 +32,11 @@ public Result save(@RequestBody Result result) {
 public List<Result> getAll() {
     return repository.findAll();
 }
+
+
+
+
+
+
+
 }

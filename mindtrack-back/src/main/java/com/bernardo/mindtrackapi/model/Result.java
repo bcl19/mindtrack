@@ -18,10 +18,8 @@ public class Result {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int atencao;
-    private int memoria;
-    private int raciocinio;
-    private int velocidade;
+    private int energia;
+    private int ansiedade;
 
     private LocalDateTime createdAt = LocalDateTime.now();
 }
