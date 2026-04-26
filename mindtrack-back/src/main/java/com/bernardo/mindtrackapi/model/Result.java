@@ -22,4 +22,9 @@ public class Result {
     private int ansiedade;
 
     private LocalDateTime createdAt = LocalDateTime.now();
+
+
+    public int getMoodLevel() {
+        return (energia - ansiedade + 10) / 2 ;
+    }
 }
