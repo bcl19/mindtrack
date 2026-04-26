@@ -1,6 +1,6 @@
-# MindTrack API
+# MindTrack
 
-Backend API for the MindTrack application.
+A mental health aplication
 
 ## Overview
 
@@ -8,7 +8,7 @@ MindTrack is a mental health and productivity tracking platform. This repository
 
 ## Tech Stack
 
-- React.js / Java 
+- React.js / Java  
 - Framework: Spring Boot
 - Database: PostgreSQL
 
