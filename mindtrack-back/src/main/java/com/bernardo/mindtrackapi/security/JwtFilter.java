@@ -1,43 +1,52 @@
 package com.bernardo.mindtrackapi.security;
 
-import com.bernardo.mindtrackapi.model.User;
-import com.bernardo.mindtrackapi.repository.UserRepository;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.io.IOException;
+
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.lang.*; 
 
-import java.io.IOException;
-import java.util.List;
-
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 @Component
-public class JwtFilter extends GenericFilter {
+public class JwtFilter extends OncePerRequestFilter {
 
-    @Autowired
-    private JwtService jwtService;
-
-    @Autowired
-    private UserRepository userRepository;
+    private final JwtUtil jwtUtil;
+    private final UserSecurity userSecurity; 
+    public JwtFilter(JwtUtil jwtUtil, UserSecurity userSecurity) {
+        this.jwtUtil = jwtUtil;
+        this.userSecurity = userSecurity;
+    }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-            throws IOException, ServletException {
+    protected void doFilterInternal( @NonNull HttpServletRequest request,
+                                     @NonNull HttpServletResponse response,
+                                     @NonNull FilterChain chain)
+            throws ServletException, IOException {
 
-        HttpServletRequest req = (HttpServletRequest) request;
-        String header = req.getHeader("Authorization");
+        String header = request.getHeader("Authorization");
 
         if (header != null && header.startsWith("Bearer ")) {
+
             String token = header.substring(7);
-            String email = jwtService.extractEmail(token);
 
-            User user = userRepository.findByEmail(email).orElse(null);
+            if (jwtUtil.isTokenValid(token)) {
 
-            if (user != null) {
+                String email = jwtUtil.extractEmail(token);
+
+                var userDetails = userSecurity.loadUserByUsername(email);
+
                 var auth = new UsernamePasswordAuthenticationToken(
-                        user, null, List.of()
+                        userDetails,
+                        null,
+                        userDetails.getAuthorities()
                 );
+
                 SecurityContextHolder.getContext().setAuthentication(auth);
             }
         }
