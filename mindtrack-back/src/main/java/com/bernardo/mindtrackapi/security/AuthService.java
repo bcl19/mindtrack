@@ -1,53 +1,55 @@
 package com.bernardo.mindtrackapi.security;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.bernardo.mindtrackapi.model.User;
-import com.bernardo.mindtrackapi.model.Role; // 🔥 IMPORTANTE
 import com.bernardo.mindtrackapi.repository.UserRepository;
 
 @Service
 public class AuthService {
 
-    private final UserRepository repo;
-    private final JwtService jwt;
-    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
 
-    public AuthService(UserRepository repo, JwtService jwt) {
-        this.repo = repo;
-        this.jwt = jwt;
+    public AuthService(UserRepository userRepository,
+                       PasswordEncoder passwordEncoder,
+                       JwtUtil jwtUtil) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtUtil = jwtUtil;
     }
 
     public AuthResponseDTO login(AuthRequestDTO request) {
-        User user = repo.findByEmail(request.email()).orElse(null);
 
-        if (user == null) {
-            throw new RuntimeException("Usuário não encontrado");
+        var user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new RuntimeException("Email ou senha inválidos"));
+
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+            throw new RuntimeException("Email ou senha inválidos");
         }
 
-        if (!encoder.matches(request.password(), user.getPassword())) {
-            throw new RuntimeException("Senha inválida");
-        }
+        String token = jwtUtil.generateToken(user.getEmail());
 
-        String token = jwt.generateToken(user);
         return new AuthResponseDTO(token);
     }
 
     public AuthResponseDTO register(AuthRequestDTO request) {
-        if (repo.findByEmail(request.email()).isPresent()) {
-            throw new RuntimeException("Email já cadastrado");
+
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+            throw new RuntimeException("Usuário já existe");
         }
 
         User user = new User();
-        user.setName(request.name());
-        user.setEmail(request.email());
-        user.setPassword(encoder.encode(request.password()));
-        user.setRole(Role.USER); // 🔥 CORREÇÃO PRINCIPAL
+        user.setEmail(request.getEmail());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setName(request.getName());
 
-        repo.save(user);
+        userRepository.save(user);
 
-        String token = jwt.generateToken(user);
+        String token = jwtUtil.generateToken(user.getEmail());
+
         return new AuthResponseDTO(token);
     }
 }
